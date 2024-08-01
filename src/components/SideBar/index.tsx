@@ -1,18 +1,21 @@
 "use client";
 import { useSearch, useSettings } from "@/lib/hooks";
 import { cn } from "@/lib/utils";
+import { useMutation } from "convex/react";
 import {
   ChevronsLeft,
-  HomeIcon,
-  InboxIcon,
   MenuIcon,
+  PlusCircle,
   SearchIcon,
   Settings,
 } from "lucide-react";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { toast } from "sonner";
 import { useMediaQuery } from "usehooks-ts";
+import { api } from "../../../convex/_generated/api";
 import { Logo } from "../common/Logo";
+import DocumentList from "../DocumentList";
 import Item from "../Item";
 import UserItem from "../UserItem";
 
@@ -30,7 +33,19 @@ export default function SideBar() {
 
   const [isResetting, setIsResetting] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(isMobile);
+  const create = useMutation(api.documents.create);
 
+  const onCreate = () => {
+    const createDocHandler = create({ title: "New Doc" }).then(
+      (documentId) => {}
+    );
+
+    toast.promise(createDocHandler, {
+      loading: "Creating a new note...",
+      success: "New note created!",
+      error: "Failed to create a new note.",
+    });
+  };
   useEffect(() => {
     isMobile ? collapse() : resizePage();
   }, [isMobile]);
@@ -123,20 +138,13 @@ export default function SideBar() {
         </div>
         <div>
           <UserItem />
-          <Item
-            icon={SearchIcon}
-            label="Search"
-            id={1}
-            onClick={search.onOpen}
-          />
-          <Item
-            label="Settings"
-            id={2}
-            icon={Settings}
-            onClick={settings.onOpen}
-          />
-          <Item icon={HomeIcon} id={3} label="Home" />
-          <Item icon={InboxIcon} id={4} label="Inbox" />
+          <Item icon={SearchIcon} label="Search" onClick={search.onOpen} />
+          <Item label="Settings" icon={Settings} onClick={settings.onOpen} />
+          <Item icon={PlusCircle} label="New Page" onClick={onCreate} />
+          {/* <Item icon={InboxIcon}  label="Inbox" /> */}
+        </div>
+        <div className="mt-4">
+          <DocumentList />
         </div>
         <div
           onMouseDown={handleMouseDown}

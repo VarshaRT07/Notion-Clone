@@ -6,6 +6,8 @@ import { ConvexProviderWithClerk } from "convex/react-clerk";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { type ThemeProviderProps } from "next-themes/dist/types";
 import { useEffect, useState } from "react";
+import { Toaster } from "sonner";
+
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
 }
@@ -58,6 +60,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         storageKey="notion-theme"
       >
         <ModalProvider />
+        <Toaster position="top-right" />
         {children}
       </ThemeProvider>
     </ConvexClientProvider>
