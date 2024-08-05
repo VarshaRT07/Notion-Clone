@@ -5,12 +5,13 @@ import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { api } from "../../../convex/_generated/api";
 import Item from "../Item";
+import { Id } from "../../../convex/_generated/dataModel";
 
 export default function DocumentList({
   parentDocument,
   level = 0,
 }: {
-  parentDocument?: any;
+  parentDocument?: Id<"documents">;
   level?: number;
 }) {
   const router = useRouter();
@@ -46,7 +47,7 @@ export default function DocumentList({
     <div>
       <p
         style={{
-          paddingLeft: level ? `${level * 12 + 25}px` : undefined,
+          paddingLeft: level ? `${level * 12 + 25}px` : '25px',
         }}
         className={cn(
           "hidden text-sm font-medium text-muted-foreground/80",
@@ -59,17 +60,22 @@ export default function DocumentList({
       {documents &&
         documents.map((document) => {
           return (
-            <Item
-              id={document._id}
-              onClick={() => onRedirect(document._id)}
-              label={document.title}
-              icon={FileIcon}
-              documentIcon={document.icon}
-              active={params.documentId === document._id}
-              level={level}
-              onExpand={() => onExpand(document._id)}
-              expanded={expanded[document._id as keyof typeof expanded]}
-            />
+            <div>
+              <Item
+                id={document._id}
+                onClick={() => onRedirect(document._id)}
+                label={document.title}
+                icon={FileIcon}
+                documentIcon={document.icon}
+                active={params.documentId === document._id}
+                level={level}
+                onExpand={() => onExpand(document._id)}
+                expanded={expanded[document._id as keyof typeof expanded]}
+              />
+              {expanded[document._id as keyof typeof expanded] && (
+                <DocumentList parentDocument={document._id} level={level + 1} />
+              )}
+            </div>
           );
         })}
     </div>

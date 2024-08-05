@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/shadcn/ui/button";
+import { Button } from "@/components/ui/button";
 import { useUser } from "@clerk/clerk-react";
 import { useMutation } from "convex/react";
 import { PlusCircle } from "lucide-react";

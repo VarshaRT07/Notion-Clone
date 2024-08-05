@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { SignInButton, UserButton } from "@clerk/clerk-react";
 import { useConvexAuth } from "convex/react";
 import Link from "next/link";
-import { Button } from "../../shadcn/ui/button";
+import { Button } from "../../ui/button";
 import { Logo } from "../Logo";
 import ModeToggle from "../ModeToggle";
 import Spinner from "../Spinner";

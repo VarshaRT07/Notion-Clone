@@ -1,6 +1,6 @@
-import { Label } from "@/components/shadcn/ui/label";
+import { Label } from "@/components/ui/label";
 import { useSettings } from "@/lib/hooks";
-import { Dialog, DialogContent, DialogHeader } from "../../shadcn/ui/dialog";
+import { Dialog, DialogContent, DialogHeader } from "../../ui/dialog";
 import ModeToggle from "../ModeToggle";
 
 export default function SettingsModal() {

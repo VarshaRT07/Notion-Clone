@@ -1,7 +1,7 @@
 "use client";
 import { Footer } from "@/components/common/Footer";
 import Spinner from "@/components/common/Spinner";
-import { Button } from "@/components/shadcn/ui/button";
+import { Button } from "@/components/ui/button";
 import Slider from "@/components/SliderInfo";
 import { SignInButton } from "@clerk/clerk-react";
 import { useConvexAuth } from "convex/react";

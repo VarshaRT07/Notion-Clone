@@ -10,7 +10,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "../../shadcn/ui/command";
+} from "../../ui/command";
 
 export default function SearchCommand() {
   const router = useRouter();

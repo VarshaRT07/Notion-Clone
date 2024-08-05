@@ -1,14 +1,14 @@
 "use client";
 import { SignOutButton, useUser } from "@clerk/clerk-react";
 import { ChevronDown, NotebookPen } from "lucide-react";
-import { Avatar, AvatarImage } from "../shadcn/ui/avatar";
+import { Avatar, AvatarImage } from "../ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../shadcn/ui/dropdown-menu";
+} from "../ui/dropdown-menu";
 const UserItem = () => {
   const { user } = useUser();
   console.log(user, "user");

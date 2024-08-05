@@ -1,10 +1,5 @@
 import { useUser } from "@clerk/clerk-react";
 import {
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-} from "@radix-ui/react-dropdown-menu";
-import {
   ChevronDown,
   ChevronRight,
   MoreHorizontal,
@@ -14,10 +9,12 @@ import {
 import { useRouter } from "next/navigation";
 import { MouseEventHandler } from "react";
 import { toast } from "sonner";
-import { DropdownMenu, DropdownMenuTrigger } from "../shadcn/ui/dropdown-menu";
 import { Skeleton } from "../ui/skeleton";
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import { cn } from "@/lib/utils";
+import { Id } from "../../../convex/_generated/dataModel";
 export default function Item({
   id,
   icon: Icon,
@@ -30,7 +27,7 @@ export default function Item({
   onExpand,
   expanded,
 }: {
-  id?: string;
+  id?: Id<'documents'>;
   icon: any;
   label: string;
   documentIcon?: string;
@@ -50,7 +47,7 @@ export default function Item({
   const onCreate = (event: any) => {
     event.stopPropagation();
     if (!id) return;
-    const promise = create({ title: "Untitled", parentDocument: id }).then(
+    const promise = create({ title: "Untitled", parentDocument: id}).then(
       (documentId: any) => {
         if (!expanded) {
           onExpand?.();
@@ -72,6 +69,7 @@ export default function Item({
     const promise = archive({ id }).then(() => {
       router.push("/documents");
     });
+    console.log(promise)
 
     toast.promise(promise, {
       loading: "Moving to trash...",
@@ -86,8 +84,14 @@ export default function Item({
   return (
     <div
       onClick={onClick}
-      className="flex hover:bg-primary/5 p-2 text-sm"
+      className={cn(
+        "group min-h-[27px] text-sm py-2 pr-3 w-full hover:bg-primary/5 flex items-center text-muted-foreground font-medium",
+        active && "bg-primary/5 text-primary"
+      )}
       key={id}
+      style={{
+        paddingLeft: level? `${level * 12 +12}px`:"12px"
+      }}
       role="button"
     >
       {id && (
@@ -104,11 +108,11 @@ export default function Item({
       ) : (
         <Icon className="shrink-0 h-[18px] w-[18px] text-muted-foreground" />
       )}
-      <span className="truncate">{label}</span>
+      <span className="truncate pl-2">{label}</span>
       {!!id && (
         <div className="ml-auto flex items-center gap-x-2">
           <DropdownMenu>
-            <DropdownMenuTrigger onClick={(e) => e.stopPropagation()} asChild>
+            <DropdownMenuTrigger onClick={(e:any) => e.stopPropagation()} asChild>
               <div
                 role="button"
                 className="opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600"

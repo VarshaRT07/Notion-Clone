@@ -5,9 +5,11 @@ import { useMutation } from "convex/react";
 import {
   ChevronsLeft,
   MenuIcon,
+  Plus,
   PlusCircle,
   SearchIcon,
   Settings,
+  Trash,
 } from "lucide-react";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -18,6 +20,8 @@ import { Logo } from "../common/Logo";
 import DocumentList from "../DocumentList";
 import Item from "../Item";
 import UserItem from "../UserItem";
+import TrashBox from "../TrashBox";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 
 export default function SideBar() {
   const router = useRouter();
@@ -112,6 +116,8 @@ export default function SideBar() {
       setTimeout(() => setIsResetting(false), 300);
     }
   };
+
+  const handleCreate = () => {};
   return (
     <>
       <aside
@@ -145,6 +151,18 @@ export default function SideBar() {
         </div>
         <div className="mt-4">
           <DocumentList />
+          <Item onClick={handleCreate} icon={Plus} label="Add a page" />
+          <Popover>
+            <PopoverTrigger className="w-full mt-4">
+              <Item label="Trash" icon={Trash} />
+            </PopoverTrigger>
+            <PopoverContent
+              className="p-0 w-72"
+              side={isMobile ? "bottom" : "right"}
+            >
+              <TrashBox />
+            </PopoverContent>
+          </Popover>
         </div>
         <div
           onMouseDown={handleMouseDown}
