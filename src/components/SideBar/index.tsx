@@ -22,6 +22,7 @@ import Item from "../Item";
 import UserItem from "../UserItem";
 import TrashBox from "../TrashBox";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import Navbar from "../DocumentNavbar";
 
 export default function SideBar() {
   const router = useRouter();
@@ -147,7 +148,6 @@ export default function SideBar() {
           <Item icon={SearchIcon} label="Search" onClick={search.onOpen} />
           <Item label="Settings" icon={Settings} onClick={settings.onOpen} />
           <Item icon={PlusCircle} label="New Page" onClick={onCreate} />
-          {/* <Item icon={InboxIcon}  label="Inbox" /> */}
         </div>
         <div className="mt-4">
           <DocumentList />
@@ -180,9 +180,8 @@ export default function SideBar() {
       >
         <nav className="bg-transparent px-3 py-2 w-full">
           {params.documentId ? (
-            <div> </div>
+            <Navbar isCollapsed={isCollapsed} onResetWidth={resizePage} />
           ) : (
-            // <Navbar isCollapsed={isCollapsed} onResetWidth={resizePage} />
             <nav className="bg-transparent px-3 py-2 w-full">
               {isCollapsed && (
                 <MenuIcon

@@ -77,6 +77,7 @@ export default function Item({
       error: "Failed to archive note.",
     });
   };
+  
   const handleExpand = (event: any) => {
     event.stopPropagation();
     onExpand?.();

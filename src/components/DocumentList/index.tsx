@@ -29,7 +29,7 @@ export default function DocumentList({
   const onRedirect = (documentId: string) => {
     router.push(`/documents/${documentId}`);
   };
-  console.log(expanded, "EXPANDED");
+
   if (documents === undefined) {
     return (
       <>
@@ -47,10 +47,10 @@ export default function DocumentList({
     <div>
       <p
         style={{
-          paddingLeft: level ? `${level * 12 + 25}px` : '25px',
+          paddingLeft: level ? `${level * 14 + 25}px` : '25px',
         }}
         className={cn(
-          "hidden text-sm font-medium text-muted-foreground/80",
+          "hidden text-sm font-medium text-muted-foreground/80 p-1",
           expanded && "last:block",
           level === 0 && "hidden"
         )}

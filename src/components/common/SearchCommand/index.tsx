@@ -34,7 +34,6 @@ export default function SearchCommand() {
 
   useEffect(() => {
     const down = (e: any) => {
-      console.log(e, "eeeee");
       if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
         toggle();

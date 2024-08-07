@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import { cn } from "@/lib/utils";
 import { SignInButton, UserButton } from "@clerk/clerk-react";
@@ -9,8 +9,8 @@ import { Logo } from "../Logo";
 import ModeToggle from "../ModeToggle";
 import Spinner from "../Spinner";
 
-const Navbar = () => {
-  const { isLoading, isAuthenticated } = useConvexAuth();
+const Header = () => {
+  const { isAuthenticated, isLoading } = useConvexAuth();
 
   return (
     <div
@@ -49,4 +49,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Header;
